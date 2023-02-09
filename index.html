@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Komputer Store</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div>Komputer Store</div>
+    </nav>
+
+
+    <div class="grid">
+
+        <!-- CARD1 -->
+        <div class="card">
+            <h2>Joe Banker</h2>
+            <div class="flex-row">
+                <p>Balance</p>
+                <p id="balance-value"> 200 Kr.</p>
+            </div>
+            <div class="flex-row" id="loan-field">
+                <p>Outstanding loan:</p>
+                <p id="loan-value"> 200 Kr.</p>
+            </div>
+            <div class="spacer">
+            </div>
+            <div class="flex-row">
+                <button id="get-loan">Get a loan</button>
+            </div>
+        </div>
+
+
+        <!-- CARD2 -->
+        <div class="card">
+            <h2>Work</h2>
+            <div class="flex-row">
+                <p>Pay</p>
+                <p id="work-value"> 200 Kr.</p>
+            </div>
+            <div class="spacer">
+            </div>
+            <div>
+                <button id="repay-loan">Repay loan</button>
+            </div>
+            <div class="flex-row">
+                <button id="transfer-to-bank">Bank</button>
+                <button id="go-work">Work</button>
+            </div>
+        </div>
+
+
+
+        <!-- CARD3 -->
+        <div class="card">
+            <h2>Laptops</h2>
+            <div>
+                <select id="dropdown">
+                    <option value="1"> a </option>
+                    <option value="2"> b </option>
+                    <option value="3"> c </option>
+                </select>
+            </div>
+            <div>
+                <h3>Features</h3>
+                <p> d validate whether the bank balance is sufficient to purchase the selected laptop. </p>
+            </div>
+        </div>
+
+
+        <!-- CARD4 -->
+        <div class="card long">
+       
+            <div class="small">
+                <img alt="computer">
+            </div>
+            <div >
+                <h1> Intol Celeroon E10 </h1>
+                <p> buy now button is the final action of your website. This button will attempt to “Buy” a laptop and validate whether the bank balance is sufficient to purchase the selected laptop.</p>
+            </div>
+            <div class="small">
+                <h2> 1500 NOK </h2>
+                <button> BUY NOW </button>
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
