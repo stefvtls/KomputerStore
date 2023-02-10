@@ -2,12 +2,13 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-p {
+p, button {
   font-size: 1.2rem;
 }
 
-h3, button {
-  font-size: 1.3rem;
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
 }
 
 h2 {
@@ -18,6 +19,28 @@ h2 {
 h1 {
   font-size: 2.4rem;
   margin-bottom: 1rem;
+}
+
+.spacer {
+  height: 5vh;
+}
+
+#dropdown {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 0.5rem 0rem 2.5rem;
+}
+
+img {
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+}
+
+li {
+  padding: 0.2rem 0;
+  list-style-type: none;
+  font-size: 1.1rem;
 }
 
 body {
@@ -40,8 +63,8 @@ nav div {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 8vh;
-  margin: 8vh 15vw;
+  gap: 5vh;
+  margin: 5vh 15vw;
   height: 70vh;
 }
 
@@ -59,7 +82,7 @@ nav div {
   grid-column-start: 1;
   grid-column-end: 4;
   flex-direction: row;
-  column-gap: 8vh;
+  column-gap: 5vh;
 }
 .card:not(.long) {
   flex-direction: column;
@@ -82,18 +105,13 @@ nav div {
 
 .flex-row {
   display: flex;
-  gap: 4vh;
+  gap: 2.5vh;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#dropdown {
-  width: 100%;
-  font-size: 1.2rem;
-}
-
 button {
-  margin: 1vh 0;
+  margin: 0.625vh 0;
   padding: 10px;
   width: 100%;
   border: 1px solid rgba(255, 165, 0, 0.9);
@@ -103,10 +121,6 @@ button {
 button:hover {
   background-color: rgba(255, 165, 0, 0.5);
   transition: all 300ms ease-in-out;
-}
-
-.spacer {
-  height: 8vh;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -46,6 +46,7 @@ function displayChoice(index) {
     // details section
     //img
     pic.setAttribute("src", `${url}/assets/images/${index}.png`);
+    pic.setAttribute("alt", ` image of ${data[index].title}`);
     //title
     title.innerText = data[index].title;
     //desc

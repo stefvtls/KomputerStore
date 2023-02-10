@@ -1,16 +1,17 @@
 $card-bg: rgba(grey, 0.1);
 $trans-all: all 300ms ease-in-out;
 $margins: 15vw;
-$gaps: 8vh;
+$gaps: 5vh;
 
 h1,h2,h3,h4,h5,h6, p{
     margin: 0;
 }
-p {
+p,button {
     font-size: 1.2rem;
 }
-h3,button {
-    font-size: 1.3rem;
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
 }
 h2 {
     font-size: 1.8rem;
@@ -21,6 +22,26 @@ h1 {
     margin-bottom: 1rem;
 }
 
+.spacer {
+    height: $gaps;
+}
+#dropdown {
+    width: 100%;
+    font-size: 1.2rem;
+    margin: 0.5rem 0rem 2.5rem ;
+}
+
+img {
+    justify-content: center;
+    width:80%;
+    margin: auto;
+}
+
+li {
+    padding: 0.2rem 0;
+    list-style-type:none;
+    font-size: 1.1rem;
+}
 body {
     margin: 0px;
 }
@@ -94,19 +115,16 @@ nav {
 .flex-row {
     display: flex;
     // border: solid 1px blue;
-    gap: $gaps/2;
+    gap: calc($gaps/2);
     flex-direction: row;
     justify-content: space-between;
 }
 
 
-#dropdown {
-    width: 100%;
-    font-size: 1.2rem;
-}
+
 
 button {
-    margin: $gaps/8 0;
+    margin: calc($gaps/8) 0;
     padding: 10px;
     width: 100%;
     border: 1px solid rgba(orange, 0.9);
@@ -117,14 +135,6 @@ button {
         transition: $trans-all;
     }
 }
-
-.spacer {
-    height: $gaps;
-}
-
-
-
-
 
 
 
