@@ -1,6 +1,61 @@
 let bankBalance = 0*1;
 let loanBalance = 0*1;
 let workBalance = 0*1;
+let data = [];
+const url = "https://hickory-quilled-actress.glitch.me/";
+
+// FETCH DATA FROM API
+(async function getJsonDataFromAPI() {
+    fetch(`${url}computers`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error (` HTTP ERROR status ${response.status}`);
+        }
+        return response;
+    })
+    .then(response => response.json())
+    .then(laptops => { 
+        data=laptops;
+        for (i=0;i<laptops.length;i++) {
+            let laptopOption = document.createElement("option");
+            laptopOption.value = laptops[i].id;
+            laptopOption.text = laptops[i].title;
+            dropdown.appendChild(laptopOption);
+        }
+        displayChoice(0);
+    })
+    .catch(error => console.log(error));
+})();
+
+
+// display elements from API 
+function updateChoice() {
+    let index = dropdown.selectedIndex;
+    displayChoice(index);
+    }
+
+function displayChoice(index) {
+    // features section
+    features.innerText = null;
+    let listOfFeatures = data[index].specs;
+        listOfFeatures.forEach(e => {
+            let li = document.createElement("li");
+            li.innerText = e;
+            features.appendChild(li);
+        })
+    // details section
+    //img
+    pic.setAttribute("src", `${url}/assets/images/${index}.png`);
+    //title
+    title.innerText = data[index].title;
+    //desc
+    description.innerText = data[index].description;
+    // price
+    price.innerText = currencyDisplay(data[index].price);
+}
+
+
+
 // BUTTONS
 const loanButton = document.getElementById("get-loan");
 const bankButton = document.getElementById("transfer-to-bank");
@@ -17,7 +72,28 @@ const loanField = document.getElementById("loan-field");
 const loanValue = document.getElementById("loan-value");
 const balanceValue = document.getElementById("balance-value");
 const workValue = document.getElementById("work-value");
+const dropdown = document.getElementById("dropdown");
+const features = document.getElementById("laptop-features");
+
+const img = document.getElementById("pic");
+const title = document.getElementById('title');
+const description = document.getElementById("description");
+const price = document.getElementById("price");
+dropdown.addEventListener("change", updateChoice);
 displayValues();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
