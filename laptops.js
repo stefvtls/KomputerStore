@@ -3,6 +3,13 @@ const {currencyDisplay, price, title} = money;
 
 
 
+// this script takes care of calling the data from api and updating all the necessary HTML elements with data from the API
+
+
+
+
+
+
 let data = [];                                                  // get a hold of the data called from the API
 let index = 0;                                                  // index of currently selected item from the dropdown list
 const URL = "https://hickory-quilled-actress.glitch.me/";       // base URL for API calls

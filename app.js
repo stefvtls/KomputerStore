@@ -5,6 +5,12 @@ const {currencyDisplay, title} = money;
 
 
 
+// this script takes care of all the money and business related functionality
+
+
+
+
+
 
 // Set up initial balances to 0. Make sure that they are treated as numbers.
 let bankBalance = parseFloat(0);
@@ -12,7 +18,7 @@ let loanBalance = parseFloat(0);
 let workBalance = parseFloat(0);
 
 
-// call to get the Data
+// call API to get the Data
 getJsonDataFromAPI();
 
 
