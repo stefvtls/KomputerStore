@@ -8,6 +8,7 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
+    <!-- top navbar -->
     <nav>
         <div>Komputer Store</div>
     </nav>
@@ -20,11 +21,15 @@
             <h2>Joe Banker</h2>
             <div class="flex-row">
                 <p>Balance</p>
-                <p id="balance-value"> 200 Kr.</p>
+                <p id="balance-value">                     
+                    <!-- here will be displayed your current bank balance -->
+                </p>
             </div>
             <div class="flex-row" id="loan-field">
                 <p>Outstanding loan:</p>
-                <p id="loan-value"> 200 Kr.</p>
+                <p id="loan-value"> 
+                    <!-- here will be displayed your current loan balance -->
+                </p>
             </div>
             <div class="spacer">
             </div>
@@ -39,7 +44,9 @@
             <h2>Work</h2>
             <div class="flex-row">
                 <p>Pay</p>
-                <p id="work-value"> 200 Kr.</p>
+                <p id="work-value">                     
+                    <!-- here will be displayed your current work balance -->
+                </p>
             </div>
             <div class="spacer">
             </div>
@@ -59,12 +66,14 @@
             <h2>Laptops</h2>
             <div>
                 <select id="dropdown">
-                    <!-- <option value=0> SELECT TO DISPLAY MORE DETAILS </option> -->
+                    <!-- here will be displayed available computer options from the API -->
                 </select>
             </div>
             <div>
                 <h3>Features</h3>
-                <p id="laptop-features"> </p>
+                <p id="laptop-features"> 
+                    <!-- here will be displayed features of the selected computer-->
+                </p>
             </div>
         </div>
 
@@ -76,11 +85,17 @@
                 <img id="pic" alt="computer">
             </div>
             <div>
-                <h1 id="title"> Intol Celeroon E10 </h1>
-                <p id="description"> </p>
+                <h1 id="title">                     
+                    <!-- here will be displayed the name/title of the currently selected computer -->
+                </h1>
+                <p id="description">                     
+                    <!-- here will be displayed the description of the currently selected computer -->
+                </p>
             </div>
             <div class="small">
-                <h2 id="price"> 1500 NOK </h2>
+                <h2 id="price">                     
+                    <!-- here will be displayed the price of the currently selected computer -->
+                </h2>
                 <button id="buy"> BUY NOW </button>
             </div>
 
