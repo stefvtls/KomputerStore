@@ -1,76 +1,19 @@
-// import laptops from"./laptops.js";
-// const {getJsonDataFromAPI, populateDropdown, displayChoice, data, index} = laptops;
-// // import buttonActions from "./buttonActions.js";
-// // const { canBuyLaptop, repayLoan, goWork, transferToBank, getLoan} = buttonActions;
+import laptops from"./laptops.js";
+const {getJsonDataFromAPI } = laptops;
+import money from"./money.js";
+const {currencyDisplay, title} = money;
+
 
 
 
 // Set up initial balances to 0. Make sure that they are treated as numbers.
-let bankBalance = parseInt(0);
-let loanBalance = parseInt(0);
-let workBalance = parseInt(0);
-
-let data = [];                                                  // get a hold of the data called from the API
-let index = 0;                                                  // index of currently selected item from the dropdown list
-const URL = "https://hickory-quilled-actress.glitch.me/";       // base URL for API calls
+let bankBalance = parseFloat(0);
+let loanBalance = parseFloat(0);
+let workBalance = parseFloat(0);
 
 
-// API CALLS
-// Asynchronous IIFE to get data from API
-async function getJsonDataFromAPI() {
-    try {
-        const response = await fetch(`${URL}computers`);                    // asynchronous GET call
-        if (!response.ok) {                                                 // if HTTP response status is not in the range 200-299...
-            throw new Error (`HTTP ERROR status ${response.status}`);       // ... throw an error...
-        }
-        data = await response.json();                                       // wait for the json from our GET call
-        populateDropdown();                                                 // as soon as our json is ready, populate the dropdown with possible laptops to buy
-        displayChoice(index);                                               // on loaded data, display the first computer from our json
-    } catch (error) {                                                       // log the error to the console 
-        console.log(error);
-    }
-};
+// call to get the Data
 getJsonDataFromAPI();
-
-
-
-
-
-// DISPLAY DATA FROM API CALLS
-// Populate dropdown list with options from the data from API call
-function populateDropdown() {
-    data.forEach(laptopData => {
-        let laptopOption = document.createElement("option");
-        laptopOption.value = laptopData.id;
-        laptopOption.text = laptopData.title;
-        dropdown.appendChild(laptopOption);
-    })
-}
-
-// On dropdown: change - update currently selected item and display corresponding details
-function updateChoice() {
-    index = dropdown.selectedIndex;
-    displayChoice(index);
-    }
-
-// Display features section on card 3, image, title, description, and price on card 4 with selected item from the dropdown
-function displayChoice(index) {
-    features.innerText = null;                                   // features section - reset what is currently in the current section
-    let listOfFeatures = data[index].specs;                      // get a hold of the list of all features of the selected product
-        listOfFeatures.forEach(e => {                            // for every feature in the features list...
-            let li = document.createElement("li");               // ... create HTML <li></li> tag...
-            li.innerText = e;                                    // ... set the content of the <li> tag to the feature of the selected computer
-            features.appendChild(li);                            // ... add this element to the features section on card 3
-        })
-
-    renderImg();                                                // img section
-    title.innerText = data[index].title;                        // title section 
-    description.innerText = data[index].description;            // description section
-    price.innerText = currencyDisplay(data[index].price);       // price section
-}
-
-
-
 
 
 
@@ -87,32 +30,14 @@ workButton.addEventListener("click", goWork);
 repayButton.addEventListener("click", repayLoan);
 buyButton.addEventListener("click", canBuyLaptop);
 
-// DROPDOWN AND THEIR EVENT LISTENERS
-const dropdown = document.getElementById("dropdown");
-dropdown.addEventListener("change", updateChoice);
 
-// ELEMENTS ON CARDS TO DISPLAY DIFFERENT TEXT/NUMERICAL VALUES
+// HTML ELEMENTS ON CARDS TO DISPLAY DIFFERENT NUMERICAL VALUES
 const loanField = document.getElementById("loan-field");
 const loanValue = document.getElementById("loan-value");
 const balanceValue = document.getElementById("balance-value");
 const workValue = document.getElementById("work-value");
-const features = document.getElementById("laptop-features");
-const img = document.getElementById("pic");
-const title = document.getElementById('title');
-const description = document.getElementById("description");
-const price = document.getElementById("price");
+const dropdown = document.getElementById("dropdown");
 displayValues();            // setting initial display with 0 balance values on welcome screen
-
-
-
-
-
-
-
-
-
-
-
 
 
 // FUNCTIONS TO UPDATE DISPLAYING OF CARDS 
@@ -121,10 +46,7 @@ function visibility() {
     const visibilityToToggle = [loanField, repayButton];
     loanBalance ? visibilityToToggle.forEach( v => v.style.visibility = "visible") : visibilityToToggle.forEach( v => v.style.visibility = "hidden");
 }
-// display the amount in the EUR format
-function currencyDisplay(number) {
-    return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(number);
-}
+
 // Update the displayed elements on the card with current balance values;
 function displayValues() {
     workValue.innerText = currencyDisplay(workBalance);
@@ -132,27 +54,6 @@ function displayValues() {
     loanValue.innerText = currencyDisplay(loanBalance);
     visibility();
 }
-
-
-// DISPLAYING IMG
-// Display laptop image using the provided endpoint
-function renderImg() {
-    pic.setAttribute("alt", ` image of ${data[index].title}`);
-    pic.setAttribute("src", `${URL}${data[index].image}`);
-    pic.onerror=toggleJpgPng;               // if there is an error rendering the image, try different path
-
-}
-// if jpg or png was not found at the asset image endpoint, try the same endpoint, but with different img format - maybe there is mistake in the API endpoint?
-function toggleJpgPng() {
-    let brokenPath = `${URL}${data[index].image}`;                          
-    let newPath = brokenPath.slice(-3) == `jpg` ? `${URL}assets/images/${data[index].id}.png`:`${URL}assets/images/${data[index].id}.jpg`;      //try the same endpoint, but with different image format
-    pic.setAttribute("src", newPath);                                                                                                           // set the new src for the image
-    pic.onerror=null;                                                                               // avoid infinite error loop in console in case no jpg or png was found - if the approach did not work
-}
-
-
-
-
 
 
 // FUNCTIONS ADDED TO BUTTONS
@@ -229,15 +130,14 @@ function repayLoan() {
 
 // check if it is possible to buy a selected computer
 function canBuyLaptop() {
-    let price = data[index].price;                                                                              // get a hold of the price of selected computer
+    let cost= dropdown.value;                                                                                   // get a hold of the price of currently selected computer                                                                  
     let declinedMessage = 'You do not have enough money. You need to get up earlier and work harder.';          // message to display if user do not have enough money to buy selected computer
-    let outOfStockMessage = 'Sorry, this item is no longer available';                                          // message to display if there is not enough computer in stock
-    data[index].stock > 0 ? (bankBalance<price?window.alert(declinedMessage):buyLaptop(price)) : window.alert(outOfStockMessage);       // check if there is enough computers in stock and user has enough money to buy selected computer
+    bankBalance<cost ? window.alert(declinedMessage):buyLaptop(cost);                                           // check if there is enough computers in stock and user has enough money to buy selected computer
     
 }
 // holds the logic for byng a selected computer
-function buyLaptop(price) {
-    bankBalance -= price;                                       // subtract money from user's bank account
-    displayValues();                                            // updates values on the cards
-    window.alert(`Successfully purchased ${data[index].title}. Your order will be shipped to you within next 24hours.`)         // display happy message to the user of successful purchase
+function buyLaptop(cost) {
+    bankBalance -= cost;                                                                                                      // subtract money from user's bank account
+    displayValues();                                                                                                          // updates values on the cards
+    window.alert(`Successfully purchased ${title.innerText}. Your order will be shipped to you within next 24hours.`)         // display happy message to the user of successful purchase
 }
