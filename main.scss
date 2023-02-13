@@ -7,7 +7,7 @@ h1,h2,h3,h4,h5,h6, p{
     margin: 0;
 }
 p,button {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 h3 {
     font-size: 1.5rem;
@@ -27,7 +27,7 @@ h1 {
 }
 #dropdown {
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0.5rem 0rem 2.5rem ;
 }
 
@@ -48,13 +48,12 @@ body {
 
 nav {
     background-color: rgba(0,0,0, 0.8);
-    height: 8vh;
+    height: 5.5rem;
     color: white;
-    font-size: 60px;
     div {
         margin: 0 $margins;
         padding: 1vh;
-        font-size: 5vh;
+        font-size: 3.5rem;
     }
 }
 
@@ -84,7 +83,6 @@ nav {
     &.long {
         grid-column-start: 1;
         grid-column-end: 4;
-        flex-direction: row;
         column-gap: $gaps;
     }
     &:not(.long) {
@@ -131,7 +129,7 @@ button {
     background-color: rgba(orange, 0.85);
     border-radius: 5px;
     &:hover {
-        background-color: rgba(orange, 0.50);
+        background-color: rgba(rgb(255, 94, 0), 0.75);
         transition: $trans-all;
     }
 }
@@ -139,4 +137,47 @@ button {
 
 
 
+// layouts till 320px width
+@media (max-width: 1100px) {
+    :root {
+        font-size: 20px;
+    }
+    .grid {
+        display: block;
+        margin: calc($gaps/2) calc($margins/2);
 
+    }
+    .grid > * {
+        margin: 10%;
+    }
+    .long {
+        display: flex;
+        flex-direction: column;
+        gap: calc($gaps *1.5);
+    }
+    .long > * {
+        text-align: center;
+    }
+}
+
+@media (max-width: 660px) {
+
+    nav {      
+        height: 9.5rem;
+        margin: 0 auto;
+    }
+    $margins: 0;
+} 
+
+@media (max-width:360px){
+    :root{
+        font-size: 16px;
+    }
+    nav {      
+        div {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+    }
+}

@@ -1,7 +1,15 @@
+// import laptops from"./laptops.js";
+// const {getJsonDataFromAPI, populateDropdown, displayChoice, data, index} = laptops;
+// // import buttonActions from "./buttonActions.js";
+// // const { canBuyLaptop, repayLoan, goWork, transferToBank, getLoan} = buttonActions;
+
+
+
 // Set up initial balances to 0. Make sure that they are treated as numbers.
-let bankBalance = 0*1;
-let loanBalance = 0*1;
-let workBalance = 0*1;
+let bankBalance = parseInt(0);
+let loanBalance = parseInt(0);
+let workBalance = parseInt(0);
+
 let data = [];                                                  // get a hold of the data called from the API
 let index = 0;                                                  // index of currently selected item from the dropdown list
 const URL = "https://hickory-quilled-actress.glitch.me/";       // base URL for API calls
@@ -9,7 +17,7 @@ const URL = "https://hickory-quilled-actress.glitch.me/";       // base URL for 
 
 // API CALLS
 // Asynchronous IIFE to get data from API
-(async function getJsonDataFromAPI() {
+async function getJsonDataFromAPI() {
     try {
         const response = await fetch(`${URL}computers`);                    // asynchronous GET call
         if (!response.ok) {                                                 // if HTTP response status is not in the range 200-299...
@@ -21,7 +29,8 @@ const URL = "https://hickory-quilled-actress.glitch.me/";       // base URL for 
     } catch (error) {                                                       // log the error to the console 
         console.log(error);
     }
-})();
+};
+getJsonDataFromAPI();
 
 
 
@@ -171,20 +180,29 @@ function getLoan() {
 
 // transfer earned money to the bank account
 function transferToBank () {
-    if (loanBalance) {                                          // if user has a loan
-        loanBalance -= 0.1*workBalance;                         //...then transfer 10% of his work value to pay back the loan
-        bankBalance += 0.9*workBalance;                         // .... and 90% of his work value to the bank account
-        if (loanBalance < 0) {                                  // but if this 10% is bigger than the open loan...
-            bankBalance += Math.abs(loanBalance);               // ...transfer that value to the bank...
-            loanBalance = 0;                                    // ...and reset the loan back to zero
+    if (workBalance) {                                              // if there is money that you could transfer...
+        if (loanBalance) {                                          // if user has a loan
+            loanBalance -= 0.1*workBalance;                         //...then transfer 10% of his work value to pay back the loan
+            bankBalance += 0.9*workBalance;                         // .... and 90% of his work value to the bank account
+            if (loanBalance < 0) {                                  // but if this 10% is bigger than the open loan...
+                bankBalance += Math.abs(loanBalance);               // ...transfer that value to the bank...
+                loanBalance = 0;                                    // ...and reset the loan back to zero
+            }
+        } else {
+            bankBalance += workBalance;                             // if there was no loan, transfer all the money to the bank account
         }
+        workBalance = 0;                                            // reset the value of work balance
+        displayValues();                                            // updates values on the cards
     } else {
-        bankBalance += workBalance;                             // if there was no loan, transfer all the money to the bank account
+        nothingToTransfer();                                        // if there are no funds, display a sad message that the transfer is not possible
     }
-    workBalance = 0;                                            // reset the value of work balance
-    displayValues();                                            // updates values on the cards
+   
 }
 
+// display a message that operation is not supported if there are no funds
+function nothingToTransfer() {
+    window.alert("You have no funds to transfer. You have to work a bit harder.")
+}
 
 // earning money
 function goWork() {
@@ -194,13 +212,18 @@ function goWork() {
 
 // pay back the loan
 function repayLoan() {
-    loanBalance -= workBalance;                             // transfer all the earned money to pay the loan...
-    if (loanBalance < 0) {                                  // ...if loan was smaller than the transferred money...
-        bankBalance += Math.abs(loanBalance);               // ... then the value that was over the loan balance transfer back to the bank balance
-        loanBalance = 0;                                    // ...and reset the loan back to zero
+    if (workBalance) {                                          // if there is money that you could transfer...
+        loanBalance -= workBalance;                             // transfer all the earned money to pay the loan...
+        if (loanBalance < 0) {                                  // ...if loan was smaller than the transferred money...
+            bankBalance += Math.abs(loanBalance);               // ... then the value that was over the loan balance transfer back to the bank balance
+            loanBalance = 0;                                    // ...and reset the loan back to zero
+        }
+        workBalance = 0;                                        // reset work balance to zero
+        displayValues();                                        // updates values on the cards
+    } else {
+        nothingToTransfer();                                    // if there are no funds, display a sad message that the transfer is not possible
     }
-    workBalance = 0;                                        // reset work balance to zero
-    displayValues();                                        // updates values on the cards
+    
 }
 
 
