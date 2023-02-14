@@ -72,8 +72,8 @@ function getLoan() {
             getLoan();                                                              // recursive call to give user a chance to correct his input
         } else if (amount) {                                                        // if user did not leave the input empty...
             if (amount <= 2*bankBalance) {                                          // ...and the amount that he request is not bigger than twice his current bank balance
-                loanBalance += amount/1;                                            // ...add that value to his bank account...
-                bankBalance += amount/1;                                            // ... and open a loan for the same amount.
+                loanBalance += amount;                                            // ...add that value to his bank account...
+                bankBalance += amount;                                            // ... and open a loan for the same amount.
                 displayValues();                                                    // updates values on the cards
             } else {
                 window.alert("sorry, you cannot get a loan of value more than double of your current bank account balance");        // ... display a message that user cannot take this high loan
