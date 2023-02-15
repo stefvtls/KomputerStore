@@ -72,8 +72,8 @@ function getLoan() {
             getLoan();                                                              // recursive call to give user a chance to correct his input
         } else if (amount) {                                                        // if user did not leave the input empty...
             if (amount <= 2*bankBalance) {                                          // ...and the amount that he request is not bigger than twice his current bank balance
-                loanBalance += amount;                                            // ...add that value to his bank account...
-                bankBalance += amount;                                            // ... and open a loan for the same amount.
+                loanBalance += parseFloat(amount);                                            // ...add that value to his bank account...
+                bankBalance += parseFloat(amount);                                            // ... and open a loan for the same amount.
                 displayValues();                                                    // updates values on the cards
             } else {
                 window.alert("sorry, you cannot get a loan of value more than double of your current bank account balance");        // ... display a message that user cannot take this high loan
@@ -141,7 +141,7 @@ function canBuyLaptop() {
     bankBalance<cost ? window.alert(declinedMessage):buyLaptop(cost);                                           // check if there is enough computers in stock and user has enough money to buy selected computer
     
 }
-// holds the logic for byng a selected computer
+// holds the logic for buying a selected computer
 function buyLaptop(cost) {
     bankBalance -= cost;                                                                                                      // subtract money from user's bank account
     displayValues();                                                                                                          // updates values on the cards
